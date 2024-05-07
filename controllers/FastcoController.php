@@ -4,13 +4,11 @@ namespace app\controllers;
 use Yii;
 use app\models\Users;
 use app\models\WpUsers;
-use app\models\UserDevices;
 use yii\web\Controller;
 use Firebase\JWT\JWT;
 use Firebase\JWT\JWK;
 use yii\httpclient\Client;
 use app\models\utilities\AnalyticsHelper;
-
 /**
  * Class FastcoController
  *

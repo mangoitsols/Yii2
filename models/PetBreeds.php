@@ -70,7 +70,8 @@ class PetBreeds extends \yii\db\ActiveRecord
      * @param null $breedType
      * @return array
      */
-    static function getPetTypeForAutocomplete($breedType = null) {
+    static function getPetTypeForAutocomplete($breedType = null)
+    {
         $breeds = PetBreeds::find();
         if ($breedType != null)
             $breeds->where(["petTypeID" => $breedType]);
@@ -92,7 +93,8 @@ class PetBreeds extends \yii\db\ActiveRecord
      * @param array|string $search - Either an active query search, or a string representing the id of the row
      * @return PetBreed|null
      */
-    static function findModel($search) {
+    static function findModel($search)
+    {
         $arraySearch = (is_array($search) ? $search : ["id" => $search]);
         $find = PetBreeds::find()
             ->where($arraySearch);
@@ -107,9 +109,10 @@ class PetBreeds extends \yii\db\ActiveRecord
      * @return array
      */
 
-    static function petBreedsArray($filter = NULL) {
+    static function petBreedsArray($filter = NULL)
+    {
 
-        if(is_null($filter)) {
+        if (is_null($filter)) {
             $search = PetBreeds::find()->select('id, name')->all();
         } else {
             $search = PetBreeds::find()->select('id, name')
@@ -117,7 +120,7 @@ class PetBreeds extends \yii\db\ActiveRecord
                 ->where(['userID' => $filter])->all();
         }
 
-        $result=$search;
+        $result = $search;
 
         return $result;
     }

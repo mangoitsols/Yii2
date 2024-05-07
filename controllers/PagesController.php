@@ -15,18 +15,9 @@ use yii\helpers\Url;
 use app\models\forms\ContactForm;
 use app\models\forms\ComplaintForm;
 use app\models\forms\IncidentForm;
-use app\models\forms\SearchForm;
-use app\models\Services;
-use app\models\Listings;
 use yii\db\Query;
-
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Style\Fill;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use app\models\utilities\Distance;
-use app\models\WalletTransaction;
-use app\models\utilities\StripeHelper;
-use app\models\Mailqueue;
+
 
 /**
  * Class PagesController
@@ -56,9 +47,9 @@ class PagesController extends Controller
 
 		Yii::$app->response->redirect(Url::to(['/dog-kennels-near-me']), 301);
 		/*  $this->view->params['page_title'] = 'Local Dog Kennels Near Me - PetCloud';
-        $this->view->params['banner_description'] = 'With local & national maps for searching, PetCloud makes it easy to find thousands of trusted Minders across the country ready to care for your pet. Simply search your Suburb and begin browsing through PetCloud Minders in your area.';
-        $this->view->params['banner_image'] = '/img/pages/about-banner.jpg';
-        return $this->render('searchKennels'); */
+									  $this->view->params['banner_description'] = 'With local & national maps for searching, PetCloud makes it easy to find thousands of trusted Minders across the country ready to care for your pet. Simply search your Suburb and begin browsing through PetCloud Minders in your area.';
+									  $this->view->params['banner_image'] = '/img/pages/about-banner.jpg';
+									  return $this->render('searchKennels'); */
 	}
 
 	public function actionSearchkennelsnearme()
@@ -125,7 +116,7 @@ class PagesController extends Controller
 	public function actionComplaintform()
 	{
 
-		$secretKey  = Yii::$app->params['CaptchaSecret'];
+		$secretKey = Yii::$app->params['CaptchaSecret'];
 		$captchaVarification = false;
 		$model = new ComplaintForm();
 
@@ -155,7 +146,7 @@ class PagesController extends Controller
 	public function actionInsidentform()
 	{
 
-		$secretKey  = Yii::$app->params['CaptchaSecret'];
+		$secretKey = Yii::$app->params['CaptchaSecret'];
 		$captchaVarification = false;
 		$model = new IncidentForm();
 
@@ -185,11 +176,6 @@ class PagesController extends Controller
 
 	public function actionDiversitypolicy()
 	{
-
-		//$this->view->params['page_title'] = 'Our Policies';
-		//$this->view->params['banner_description'] = 'PetCloud has Pet Sitters right across Australia ready to care for your pet, like one of their own. Simply post a job, and this will alert sitters in your area and available ones will apply!';
-		// $this->view->params['banner_image'] = 'https://cdn.petcloud.com.au/img/pages/pet-sitter-near-me.png';
-
 		return $this->render('diversitypolicy');
 	}
 
@@ -209,7 +195,7 @@ class PagesController extends Controller
 	public function actionContact_us()
 	{
 
-		$secretKey  = Yii::$app->params['CaptchaSecret'];
+		$secretKey = Yii::$app->params['CaptchaSecret'];
 		$captchaVarification = false;
 		$model = new ContactForm();
 
@@ -348,30 +334,6 @@ class PagesController extends Controller
 		return;
 	}
 
-	public function actionPetcloudacademy()
-	{
-		// $this->view->params['page_title'] = 'Become a highly sought after Pet Sitter.';
-		// $this->view->params['banner_description'] = 'PetCloud is exclusively the ONLY Pet Sitting company in Australia offering a Pet Sitting course Accredited by RSPCA Vet Professionals.';
-		// $this->view->params['banner_image'] = '/img/pages/petsitter_banner.jpg';
-		// if(isset(Yii::$app->user->identity) && !empty(Yii::$app->user->identity->coursePurchase)){
-		// $link = "https://www.openlearning.com/courses/pet-sitter-course/HomePage/";
-		// $class = "initiatecheckoutNo";
-		// $btn = "Go to Pet Sitting Course";
-		// }else{
-
-		// $link = "/products/course/pet-sitting-course";
-		// $class = "initiatecheckout";
-		// $btn = "ENROL NOW";
-		// }
-		// $this->view->params['extra_button'] = '<div class="col-xs-12 text-center"><a class="'.$class.'" rel="nofollow" href="' . $link . '" ><button type="button" class="btn btn-aqua" style="font-size: 28px;padding: 15px;">'.$btn.'</button></a></div>';
-		// if(Yii::$app->user->isGuest){
-		// $this->view->params['post_job_btn'] = '<a class="banner_inner_btn pet-sitter '.$class.'" href="' . $link . '" >'.$btn.'</a>';
-		// }else{
-		// $this->view->params['post_job_btn'] = '<a class="banner_inner_btn" href="/post-a-job">Post a Job</a>';
-		// }
-		return $this->render('pet_minding_course');
-	}
-
 	public function actionPet_owner_course()
 	{
 		$this->view->params['page_title'] = 'Accredited Pet Owner Course';
@@ -435,20 +397,6 @@ class PagesController extends Controller
 
 	public function actionReviews()
 	{
-		/* $reviews = Review::find()
-            ->where(['in', 'rate',array(4,5)])
-            ->groupBy(['minderId','ownerId'])
-            ->limit(1000)
-            ->orderBy('createdate DESC')
-            ->with([
-                'owner' => function($query) {
-                    $query->select(Users::$publicFields);
-                },
-                'minder' => function($query) {
-                    $query->select(Users::$publicFields);
-                }
-            ])
-        ->all(); */
 		$this->view->params['page_title'] = "See what people are saying about PetCloud";
 		$this->view->params['banner_description'] = "We are a radically transparent sharing economy organisation. We aim to continually improve, and every review helps other Pet Owners make good booking decisions, and helps our community provide better experiences for everyone.";
 		$this->view->params['banner_image'] = '/img/pages/Pet_Owner_Reviews_banner.jpg';
@@ -576,18 +524,6 @@ class PagesController extends Controller
 		}
 		return $this->render('press-media');
 	}
-
-	// public function actionInvestors() {
-	// $this->view->params['page_title'] = 'Investors';
-	// $this->view->params['banner_description'] = "Our mission is to provide better quality pet care, from trusted local pet lovers. The vision for PetCloud is simple - Your pet's life - in the one cloud";
-	// $this->view->params['banner_image'] = '/img/pages/investors-banner.jpg';
-	// if(Yii::$app->user->isGuest){
-	// $this->view->params['post_job_btn'] = '<a class="banner_inner_btn" href="/guest/post-a-job">Post a Job</a>';
-	// }else{
-	// $this->view->params['post_job_btn'] = '<a class="banner_inner_btn" href="/post-a-job">Post a Job</a>';
-	// }
-	// return $this->render('investors');
-	// }
 
 	public function actionPet_care_services()
 	{
@@ -725,10 +661,6 @@ class PagesController extends Controller
 	public function actionDoggy_day_care()
 	{
 
-		//		$this->view->params['page_title'] = "Doggy Day Care - Day care for your Puppy or Dog while you're away!";
-		//		$this->view->params['banner_description'] = "Very few of us have the luxury of being able to stay home with our pets. Doggy day care can help with some of these issues and more";
-		//		$this->view->params['banner_image'] = '/img/pages/how-it-works-banner.jpg';
-
 		if (Yii::$app->user->isGuest) {
 			$link = '<a href="guest/post-a-job" class="btn btn-aqua" style="font-size: 24px;padding: 15px;">Post a Job</a>';
 			$this->view->params['post_job_btn'] = '<a class="banner_inner_btn" href="/guest/post-a-job">Post a Job</a>';
@@ -739,7 +671,6 @@ class PagesController extends Controller
 		$this->view->params['extra_button'] = "<div class='col-xs-12 text-center'>$link </div>";
 
 		return $this->render('doggyDayCare');
-		//###return $this->render('services/doggy_day_care');
 
 	}
 
@@ -773,23 +704,9 @@ class PagesController extends Controller
 
 		return $this->render('become_dog_groomer');
 	}
-	public function actionDog_boarding_sydney()
-	{
-
-		// $this->view->params['page_title'] = 'Looking for Dog Boarding in Sydney?';
-		// $this->view->params['banner_description'] = "More and more Dog Owners, like you, prefer PetCloud’s home dog boarding in Sydney";
-		// $this->view->params['banner_image'] = '/img/pages/best-sitter/Dog-Sitting-Banner.png';
-		return $this->render('boardingsydney');
-		//###return $this->render('services/doggy_day_care');
-
-	}
 
 	public function actionDog_sitters()
 	{
-		//$this->view->params['page_title'] = 'Dog Sitting, Home Dog Boarding & Dog Minding';
-		//$this->view->params['banner_description'] = "On PetCloud you can find pet care in real homes by searching for local and insured dog sitters in your neighbourhood, book them online and arrange a meet & greet";
-		//$this->view->params['banner_image'] = '/img/pages/services/dog-sitter-banner-sml.jpg';
-		//$this->view->params['banner_id'] = "dog-sitting";
 		$url = Url::to(["/pet-sitters?"], 'https');
 		if (Yii::$app->user->isGuest) {
 			$link = '<a href="guest/post-a-job" class="btn btn-aqua" style="font-size: 24px;padding: 15px;">Post a Job</a>';
@@ -804,23 +721,8 @@ class PagesController extends Controller
 
 	public function actionDog_walkers()
 	{
-
-
-		//		$this->view->params['page_title'] = 'Dog Walking';
-		//		$this->view->params['banner_description'] = "With a busy schedule you can't always find the time to take your dog for a walk. At PetCloud you can find local dog walkers who can take your dog for a 30 min walk";
-		//		$this->view->params['banner_image'] = '/img/pages/about-banner.jpg';
 		$url = Url::to(["/pet-sitters?"], 'https');
 
-		//		$query = new Query;
-		//		$query->select('address')
-		//			->from('services')
-		//			->where(['or', ['serviceTypeId' => 11], ['serviceTypeId' => 14]])
-		//			->andWhere(['users.active' => 1])
-		//			->join('JOIN', 'users', 'users.id = services.userId')
-		//			->groupBy('address');
-		//		$services = $query->all();
-		//
-		//		$this->view->params['walkersuburbs'] = $services;
 		if (Yii::$app->user->isGuest) {
 			$link = '<a href="guest/post-a-job" class="btn btn-aqua" style="font-size: 24px;padding: 15px;">Post a Job</a>';
 			$this->view->params['post_job_btn'] = '<a class="banner_inner_btn" href="/guest/post-a-job">Post a Job</a>';
@@ -834,10 +736,6 @@ class PagesController extends Controller
 
 	public function actionHouse_sitters()
 	{
-		//		$this->view->params['page_title'] = 'House Sitting/Home Visits';
-		//		$this->view->params['banner_description'] = "On PetCloud, you can find house sitters who will come and stay at your place while you're away to take care of your pets and your house";
-		//		$this->view->params['banner_image'] = '/img/pages/services/house-visits-banner.jpg';
-
 		if (Yii::$app->user->isGuest) {
 			$link = '<a href="guest/post-a-job" class="btn btn-aqua" style="font-size: 24px;padding: 15px;">Post a Job</a>';
 			$this->view->params['post_job_btn'] = '<a class="banner_inner_btn" href="/guest/post-a-job">Post a Job</a>';
@@ -864,10 +762,6 @@ class PagesController extends Controller
 
 	public function actionHome_visits()
 	{
-		//		$this->view->params['page_title'] = 'House Sitting/Home Visits';
-		//		$this->view->params['banner_description'] = "On PetCloud, you can find house sitters who will come and stay at your place while you're away to take care of your pets and your house";
-		//		$this->view->params['banner_image'] = '/img/pages/services/house-visits-banner.jpg';
-
 		if (Yii::$app->user->isGuest) {
 			$link = '<a href="guest/post-a-job" class="btn btn-aqua" style="font-size: 24px;padding: 15px;">Post a Job</a>';
 			$this->view->params['post_job_btn'] = '<a class="banner_inner_btn" href="/guest/post-a-job">Post a Job</a>';
@@ -898,9 +792,6 @@ class PagesController extends Controller
 
 	public function actionDog_groomers()
 	{
-		//		$this->view->params['page_title'] = 'Dog Groomers';
-		//		$this->view->params['banner_description'] = "Now who doesn't love a good pampering and grooming session? Grooming is not only important for your dog's cleanliness but also for it's health and appearance";
-		//		$this->view->params['banner_image'] = '/img/pages/services/dog-grooming-banner.jpg';
 		$url = Url::to(["/pet-sitters?"], 'https');
 		if (Yii::$app->user->isGuest) {
 			$link = '<a href="guest/post-a-job" class="btn btn-aqua" style="font-size: 24px;padding: 15px;">Post a Job</a>';
@@ -961,10 +852,6 @@ class PagesController extends Controller
 
 	public function actionPet_taxi()
 	{
-
-		//		$this->view->params['page_title'] = 'Pet Taxi';
-		//		$this->view->params['banner_description'] = "Door to Door pet pick up and drop offs. Don't have time to drop off your pet to the sitter's place? Ask the sitters to pick up and drop off your pet before the booking starts";
-		//		$this->view->params['banner_image'] = '/img/pages/services/pet-taxi-banner-sml.jpg';
 		$url = Url::to(["/pet-sitters?"], 'https');
 		if (Yii::$app->user->isGuest) {
 			$link = '<a href="guest/post-a-job" class="btn btn-aqua" style="font-size: 24px;padding: 15px;">Post a Job</a>';

@@ -10,12 +10,8 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\GoneHttpException;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\helpers\StringHelper;
-use app\models\forms\ContactForm;
+
 
 /**
  * Class BlogController
